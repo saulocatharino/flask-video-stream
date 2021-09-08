@@ -27,30 +27,6 @@ def add_header(r):
 	r.headers["Cache-Control"] = "public, max-age=0"
 	return r
 
-@app.route("/")
-def entrypoint():
-	logger.debug("Requested /")
-	return render_template("index.html")
-
-@app.route("/r")
-def capture():
-	logger.debug("Requested capture")
-	im = camera.get_frame(_bytes=False)
-	capture_and_save(im)
-	return render_template("send_to_init.html")
-
-@app.route("/images/last")
-def last_image():
-	logger.debug("Requested last image")
-	p = Path("images/last.png")
-	if p.exists():
-		r = "last.png"
-	else:
-		logger.debug("No last image")
-		r = "not_found.jpeg"
-	return send_from_directory("images",r)
-
-
 def gen(camera):
 	logger.debug("Starting stream")
 	while True:
@@ -58,7 +34,7 @@ def gen(camera):
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
 
-@app.route("/stream")
+@app.route("/")
 def stream_page():
 	logger.debug("Requested stream page")
 	return render_template("stream.html")
