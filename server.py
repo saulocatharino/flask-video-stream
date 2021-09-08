@@ -54,10 +54,12 @@ def last_image():
 def gen(camera):
 	logger.debug("Starting stream")
 	while True:
-		frame = camera.get_frame()
-		yield (b'--frame\r\n'
+		try:
+			frame = camera.get_frame()
+			yield (b'--frame\r\n'
 			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
-
+		except:
+			pass
 @app.route("/")
 def stream_page():
 	logger.debug("Requested stream page")
