@@ -1,5 +1,4 @@
 from flask import Flask, render_template, send_from_directory, Response
-# from flask_socketio import SocketIO
 from pathlib import Path
 from capture import capture_and_save
 from camera import Camera
@@ -12,8 +11,7 @@ camera = Camera()
 camera.run()
 
 app = Flask(__name__)
-# app.config["SECRET_KEY"] = "secret!"
-# socketio = SocketIO(app)
+
 
 @app.after_request
 def add_header(r):
