@@ -27,7 +27,7 @@ def add_header(r):
 	r.headers["Cache-Control"] = "public, max-age=0"
 	return r
 
-@app.route("/")
+@app.route("/photo")
 def entrypoint():
 	logger.debug("Requested /")
 	return render_template("index.html")
@@ -58,7 +58,7 @@ def gen(camera):
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
 
-@app.route("/stream")
+@app.route("/")
 def stream_page():
 	logger.debug("Requested stream page")
 	return render_template("stream.html")
