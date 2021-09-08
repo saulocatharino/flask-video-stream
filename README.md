@@ -1,5 +1,5 @@
 # Flask-opencv webcam streaming server #
-This is a simple python3 script that serves a tiny Flask video webserver that allows to take photos or see real time video streaming of a connected camera/webcam controlled with opencv.
+This is a simple python3 script that serves a tiny Flask video webserver that allows to take photos or see real time video streaming of a connected camera/webcam controlled with opencv with async camera capture.
 
 ## Requirements ##
 In order to execute the script you need to install opencv3 -> `import cv2` and some python modules.
