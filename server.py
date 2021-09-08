@@ -12,8 +12,7 @@ camera = Camera()
 camera.run()
 
 app = Flask(__name__)
-# app.config["SECRET_KEY"] = "secret!"
-# socketio = SocketIO(app)
+
 
 @app.after_request
 def add_header(r):
