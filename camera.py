@@ -2,7 +2,6 @@ import cv2
 import threading
 import time
 import logging
-import acapture
 
 logger = logging.getLogger(__name__)
 thread = None
@@ -51,7 +50,7 @@ class VideoCaptureThreading:
 
 
 class Camera:
-	def __init__(self,fps=20,video_source='rtmp://18.208.184.190:1935/live'):
+	def __init__(self,fps=20,video_source='rtmp://x.x.x.x:1935/live'):
 		logger.info(f"Initializing camera class with {fps} fps and video_source={video_source}")
 		self.fps = fps
 		self.video_source = video_source
