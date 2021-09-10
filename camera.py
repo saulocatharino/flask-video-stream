@@ -2,6 +2,7 @@ import cv2
 import threading
 import time
 import logging
+import numpy as np
 
 logger = logging.getLogger(__name__)
 thread = None
