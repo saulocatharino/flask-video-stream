@@ -6,10 +6,13 @@ import logging
 logger = logging.getLogger(__name__)
 thread = None
 
+backSub = cv2.createBackgroundSubtractorMOG2()
+
 def proccess(frame):
         copy = frame.copy()
         gray = cv2.cvtColor(copy, cv2.COLOR_BGR2GRAY)
-        mask = backSub.apply(frame)
+        blur = cv2.blur(frame,(5,5))
+        mask = backSub.apply(blur)
         gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         masked = cv2.bitwise_and(frame,frame, mask=mask)
         mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
