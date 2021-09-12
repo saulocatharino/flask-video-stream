@@ -36,8 +36,14 @@ class Camera:
 	def __init__(self,fps=30,video_source='rtmp://x.x.x.x:1935/live'):
 		logger.info(f"Initializing camera class with {fps} fps and video_source={video_source}")
 		self.fps = fps
-		self.video_source = video_source
-		self.camera = cv2.VideoCapture(self.video_source)
+                width = 640
+                height = 360
+                self.video_source = video_source
+                self.camera = cv2.VideoCapture(0)
+                self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+                self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+                self.camera.set(cv2.CAP_PROP_AUTO_EXPOSURE,0)
+                self.camera.set(cv2.CAP_PROP_AUTOFOCUS, 0)
 		# We want a max of 5s history to be stored, thats 5s*fps
 		self.max_frames = 5*self.fps
 		self.frames = []
