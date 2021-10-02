@@ -76,7 +76,7 @@ class Camera:
 
 	def stop(self):
 		logger.debug("Stopping thread")
-		self.isrunning = False
+		thread = None
 
 	def get_frame(self, _bytes=True):
 		if len(self.frames)>0:
