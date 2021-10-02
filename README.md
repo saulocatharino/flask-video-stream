@@ -1,4 +1,4 @@
-# Flask-opencv webcam streaming server #
+# Flask-opencv RTMP streaming server #
 This is a simple python3 script that serves a tiny Flask video webserver that allows to take photos or see real time video streaming of a connected camera/webcam controlled with opencv with async camera capture.
 
 ## Requirements ##
