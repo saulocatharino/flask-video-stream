@@ -9,7 +9,6 @@ logging.config.dictConfig(conf.dictConfig)
 logger = logging.getLogger(__name__)
 
 camera = Camera()
-camera.run()
 
 app = Flask(__name__)
 
@@ -54,7 +53,9 @@ def gen(camera):
 	logger.debug("Starting stream")
 	while True:
 		try:
+			camera.run()
 			frame = camera.get_frame()
+			camera.stop()
 			yield (b'--frame\r\n'
 			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
 		except:
