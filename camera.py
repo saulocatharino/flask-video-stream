@@ -7,29 +7,11 @@ import numpy as np
 logger = logging.getLogger(__name__)
 thread = None
 
-backSub = cv2.createBackgroundSubtractorMOG2(history=90, varThreshold=50,detectShadows = True)
 
 def proccess(frame):
 	copy = frame.copy()
 	gray = cv2.cvtColor(copy, cv2.COLOR_BGR2GRAY)
-	blur = cv2.blur(frame,(5,5))
-	mask = backSub.apply(blur)
-	contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-	reverse = np.invert(mask)
-	gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-	masked1 = cv2.bitwise_and(frame,frame, mask=mask)
-	masked2 = cv2.bitwise_and(gray,gray, mask=reverse)
-	masked = cv2.addWeighted(masked1,1,masked2,.5,0)
-	mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
-	for c in contours:
-		x,y,w,h = cv2.boundingRect(c)
-		if w>10 and h>10:
-			cv2.rectangle(frame,(x,y),(x+w,y+h),(155,255,0),2, cv2.LINE_AA)
-			cv2.rectangle(masked,(x,y),(x+w,y+h),(155,255,0),2, cv2.LINE_AA)
-	out1 = cv2.vconcat([frame,mask])
-	out2 = cv2.vconcat([gray,masked])
-	out = cv2.hconcat([out1,out2])
-	return out
+	return gray
 
 
 class Camera:
@@ -65,6 +47,8 @@ class Camera:
 		logger.debug("Observation started")
 		while self.isrunning:
 			v,im = self.camera.read()
+			
+			# Processamento do frame
 			im = proccess(im)
 
 			if v:
